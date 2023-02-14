@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 AGE_IN_YEARS = enumerate(['Less than one year', '1 year'] + ['%s years' % x for x in range(2, 100)] + ['100 or more years', ])
@@ -60,7 +60,7 @@ class Company(models.Model):
 
 class OS(models.Model):
     name = models.CharField(_('Name'), max_length=25)
-    company = models.ForeignKey(Company, verbose_name=_('Company'), null=True, blank=True)
+    company = models.ForeignKey(Company,on_delete=models.CASCADE, verbose_name=_('Company'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('OS')
@@ -97,8 +97,8 @@ class Browser(models.Model):
 
 class BrowserDownload(models.Model):
     download_date = models.DateField(_('Download date'), default=datetime.date.today)
-    browser = models.ForeignKey(Browser)
-    os = models.ForeignKey(OS, null=True, blank=True)
+    browser = models.ForeignKey(Browser,on_delete=models.CASCADE)
+    os = models.ForeignKey(OS,on_delete=models.CASCADE, null=True, blank=True)
     username = models.CharField(_('Username'), max_length=25)
     download_price = models.DecimalField(_('Download price'), decimal_places=2, max_digits=10, default=0)
 
