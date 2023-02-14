@@ -16,7 +16,7 @@ from django.forms.models import fields_for_model
 try:
     from django.db.models.fields.related import ForeignObjectRel
 except ImportError:  # Django < 1.8
-    from django.db.models.related import RelatedObject as ForeignObjectRel
+    from django.shortcuts import render
 from django.db.models import ForeignKey
 from django.conf import settings
 from django.contrib.auth.models import User
